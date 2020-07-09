@@ -1,0 +1,106 @@
+Microsoft (R) Macro Assembler Version 5.00                  7/8/20 16:07:35
+                                                             Page     1-1
+
+
+							.MODEL SMALL 
+ 0100							.STACK 100H 
+ 0000							.DATA 
+ 0000  0000 002D						YEAR3 DW,"-" 
+year.ASM(4): warning A4101: Missing data; zero assumed
+								 
+ 0004  ??							MONTH1 DB ? 
+ 0005  ??2D							MONTH2 DB ?,"-"
+				 
+								 
+ 0007  ??							DAY1 DB ? 
+ 0008  ??0D 0A 24						DAY2 DB ? ,0DH,
+				0AH,"$" 
+								 
+								 
+								 
+ 0000							.CODE 
+ 0000				MAIN 	   PROC 
+ 0000  B8 ---- R					MOV AX,@DATA 
+ 0003  8E D8						MOV DS,AX 
+							 
+ 0005  B4 2A						MOV AH,2AH 
+ 0007  CD 21						INT 21H 
+							 
+ 0009  B3 0A						MOV BL,10 
+ 000B  B4 00						MOV AH,0 
+ 000D  8A C2						MOV AL,DL 
+ 000F  F6 F3						DIV BL 
+ 0011  04 30						ADD AL,30H 
+ 0013  A2 0007 R					MOV DAY1,AL 
+							 
+ 0016  80 C4 30						ADD AH,48 
+ 0019  88 26 0008 R					MOV DAY2,AH 
+							 
+ 001D  B4 00						MOV AH,0 
+ 001F  8A C6						MOV AL,DH 
+ 0021  F6 F3						DIV BL 
+ 0023  04 30						ADD AL,30H 
+ 0025  A2 0004 R					MOV MONTH1,AL 
+							 
+ 0028  80 C4 30						ADD AH,48 
+ 002B  88 26 0005 R					MOV MONTH2,AH 
+							 
+ 002F  8B C1						MOV AX,CX 
+ 0031  B7 00						MOV BH,0 
+ 0033  F7 F3						DIV BX 
+ 0035  A3 0000 R					MOV YEAR3,AX 
+									 
+							 
+ 0038  BA 0000 R					MOV DX,OFFSET YEAR3 
+ 003B  B4 09						MOV AH,9 
+ 003D  CD 21						INT 21H 
+							 
+ 003F  B8 4C00						MOV AX,4C00H 
+Microsoft (R) Macro Assembler Version 5.00                  7/8/20 16:07:35
+                                                             Page     1-2
+
+
+ 0042  CD 21						INT 21H 
+							 
+ 0044				MAIN		ENDP 
+ 0044				END 
+Microsoft (R) Macro Assembler Version 5.00                  7/8/20 16:07:35
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	000C	WORD	PUBLIC	'DATA'
+  STACK  . . . . . . . . . . . .  	0100	PARA	STACK	'STACK'
+_TEXT  . . . . . . . . . . . . .  	0044	WORD	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+DAY1 . . . . . . . . . . . . . .  	L BYTE	0007	_DATA
+DAY2 . . . . . . . . . . . . . .  	L BYTE	0008	_DATA
+
+MAIN . . . . . . . . . . . . . .  	N PROC	0000	_TEXT	Length = 0044
+MONTH1 . . . . . . . . . . . . .  	L BYTE	0004	_DATA
+MONTH2 . . . . . . . . . . . . .  	L BYTE	0005	_DATA
+
+YEAR3  . . . . . . . . . . . . .  	L WORD	0000	_DATA
+
+@CODE  . . . . . . . . . . . . .  	TEXT  _TEXT		
+@CODESIZE  . . . . . . . . . . .  	TEXT  0		
+@DATASIZE  . . . . . . . . . . .  	TEXT  0		
+@FILENAME  . . . . . . . . . . .  	TEXT  year		
+
+
+     55 Source  Lines
+     55 Total   Lines
+     20 Symbols
+
+  51168 + 465376 Bytes symbol space free
+
+      1 Warning Errors
+      0 Severe  Errors
